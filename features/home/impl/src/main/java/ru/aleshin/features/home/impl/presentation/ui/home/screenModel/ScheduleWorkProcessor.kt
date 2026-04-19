@@ -87,6 +87,8 @@ internal interface ScheduleWorkProcessor : FlowWorkProcessor<ScheduleWorkCommand
             var cycleUpdateJob: Job? = null
             val sendDate = scheduleInteractor.fetchFeatureScheduleDate()
             val scheduleDate = sendDate ?: date ?: dateManager.fetchBeginningCurrentDay()
+            val keepTasksNotFinished = settingsInteractor.fetchTasksSettings()
+                .first().rightOrElse(null)?.keepTasksNotFinished ?: false
             scheduleInteractor.fetchScheduleByDate(scheduleDate.time).collect { scheduleEither ->
                 cycleUpdateJob?.cancelAndJoin()
                 scheduleEither.handle(
@@ -97,7 +99,7 @@ internal interface ScheduleWorkProcessor : FlowWorkProcessor<ScheduleWorkCommand
 
                             send(ActionResult(HomeAction.UpdateSchedule(schedule)))
 
-                            cycleUpdateJob = refreshScheduleState(schedule)
+                            cycleUpdateJob = refreshScheduleState(schedule, keepTasksNotFinished)
                                 .onEach { send(it) }
                                 .launchIn(this)
                                 .apply { start() }
@@ -109,11 +111,11 @@ internal interface ScheduleWorkProcessor : FlowWorkProcessor<ScheduleWorkCommand
             }
         }
 
-        private suspend fun refreshScheduleState(schedule: ScheduleUi) = flow {
+        private suspend fun refreshScheduleState(schedule: ScheduleUi, keepTasksNotFinished: Boolean = false) = flow {
             var oldTimeTasks = schedule.timeTasks
             var isWorking = true
             while (isWorking) {
-                val newTimeTasks = oldTimeTasks.map { statusController.updateStatus(it) }
+                val newTimeTasks = oldTimeTasks.map { statusController.updateStatus(it, keepTasksNotFinished) }
                 if (newTimeTasks != oldTimeTasks || schedule.timeTasks == oldTimeTasks) {
                     val completedChange = oldTimeTasks.map { it.isCompleted } != newTimeTasks.map { it.isCompleted }
                     oldTimeTasks = newTimeTasks

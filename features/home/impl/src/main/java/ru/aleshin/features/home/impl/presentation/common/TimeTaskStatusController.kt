@@ -26,21 +26,25 @@ import javax.inject.Inject
  */
 internal interface TimeTaskStatusController {
 
-    fun updateStatus(timeTask: TimeTaskUi): TimeTaskUi
+    fun updateStatus(timeTask: TimeTaskUi, keepTasksNotFinished: Boolean = false): TimeTaskUi
 
     class Base @Inject constructor(
         private val statusManager: TimeTaskStatusChecker,
         private val dateManager: DateManager,
     ) : TimeTaskStatusController {
 
-        override fun updateStatus(timeTask: TimeTaskUi) = with(timeTask) {
+        override fun updateStatus(timeTask: TimeTaskUi, keepTasksNotFinished: Boolean) = with(timeTask) {
             val currentTime = dateManager.fetchCurrentDate()
             when (val status = statusManager.fetchStatus(timeToTimeRange(), currentTime)) {
                 TimeTaskStatus.COMPLETED -> copy(
                     executionStatus = status,
                     progress = 1f,
                     leftTime = 0,
-                    isCompleted = !(executionStatus == TimeTaskStatus.COMPLETED && !isCompleted),
+                    isCompleted = if (keepTasksNotFinished) {
+                        if (executionStatus == TimeTaskStatus.COMPLETED) isCompleted else false
+                    } else {
+                        !(executionStatus == TimeTaskStatus.COMPLETED && !isCompleted)
+                    },
                 )
                 TimeTaskStatus.PLANNED -> copy(
                     executionStatus = status,

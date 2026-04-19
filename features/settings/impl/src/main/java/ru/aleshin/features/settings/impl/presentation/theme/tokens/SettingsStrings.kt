@@ -73,6 +73,7 @@ internal data class SettingsStrings(
     val calendarButtonBehaviorTitle: String,
     val currentDayCalendarBehavior: String,
     val selectDayCalendarBehavior: String,
+    val keepTasksNotFinishedTitle: String,
 )
 
 internal val russianSettingsString = SettingsStrings(
@@ -127,6 +128,7 @@ internal val russianSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Поведение кнопки календаря",
     currentDayCalendarBehavior = "Текущий день",
     selectDayCalendarBehavior = "Выбор дня",
+    keepTasksNotFinishedTitle = "Не завершать задачи автоматически",
 )
 
 internal val englishSettingsString = SettingsStrings(
@@ -181,6 +183,7 @@ internal val englishSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Calendar icon behavior",
     currentDayCalendarBehavior = "Set to today",
     selectDayCalendarBehavior = "Pick a date",
+    keepTasksNotFinishedTitle = "Keep tasks unfinished until manually marked",
 )
 
 internal val germanSettingsString = SettingsStrings(
@@ -235,6 +238,7 @@ internal val germanSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Verhalten der Kalenderschaltfläche",
     currentDayCalendarBehavior = "Aktueller Tag",
     selectDayCalendarBehavior = "Wahl des Tages",
+    keepTasksNotFinishedTitle = "Aufgaben nicht automatisch abschließen",
 )
 
 internal val spanishSettingsString = SettingsStrings(
@@ -289,6 +293,7 @@ internal val spanishSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Comportamiento del botón de calendario",
     currentDayCalendarBehavior = "Día actual",
     selectDayCalendarBehavior = "Selección del día",
+    keepTasksNotFinishedTitle = "No completar tareas automáticamente",
 )
 
 internal val persianSettingsString = SettingsStrings(
@@ -343,6 +348,7 @@ internal val persianSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "رفتار دکمه تقویم",
     currentDayCalendarBehavior = "روز جاری",
     selectDayCalendarBehavior = "انتخاب روز",
+    keepTasksNotFinishedTitle = "وظایف را به صورت خودکار تکمیل نکن",
 )
 
 internal val frenchSettingsString = SettingsStrings(
@@ -397,6 +403,7 @@ internal val frenchSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Comportement du bouton calendrier",
     currentDayCalendarBehavior = "Jour en cours",
     selectDayCalendarBehavior = "Choix du jour",
+    keepTasksNotFinishedTitle = "Ne pas compléter les tâches automatiquement",
 )
 
 internal val brazilianPortugueseSettingsString = SettingsStrings(
@@ -451,6 +458,7 @@ internal val brazilianPortugueseSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Comportamento do botão do calendário",
     currentDayCalendarBehavior = "Dia atual",
     selectDayCalendarBehavior = "Escolhendo o dia",
+    keepTasksNotFinishedTitle = "Não concluir tarefas automaticamente",
 )
 
 internal val turkishSettingsString = SettingsStrings(
@@ -505,6 +513,7 @@ internal val turkishSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Takvim düğme davranışı",
     currentDayCalendarBehavior = "Mevcut gün",
     selectDayCalendarBehavior = "Gün seçimi",
+    keepTasksNotFinishedTitle = "Görevleri otomatik olarak tamamlama",
 )
 
 internal val vietnameseSettingsString = SettingsStrings(
@@ -559,6 +568,7 @@ internal val vietnameseSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Hành vi của nút Lịch",
     currentDayCalendarBehavior = "Ngày hiện tại",
     selectDayCalendarBehavior = "Chọn ngày",
+    keepTasksNotFinishedTitle = "Không tự động hoàn thành nhiệm vụ",
 )
 
 internal val polishSettingsString = SettingsStrings(
@@ -613,6 +623,7 @@ internal val polishSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Zachowanie ikony kalendarza",
     currentDayCalendarBehavior = "Aktualny dzień",
     selectDayCalendarBehavior = "Wybór daty",
+    keepTasksNotFinishedTitle = "Nie kończ zadań automatycznie",
 )
 
 internal val italianSettingsString = SettingsStrings(
@@ -667,6 +678,7 @@ internal val italianSettingsString = SettingsStrings(
     calendarButtonBehaviorTitle = "Cosa succede quando clicco sull'icona del calendario?",
     currentDayCalendarBehavior = "Vai al giorno corrente",
     selectDayCalendarBehavior = "Scegli una data",
+    keepTasksNotFinishedTitle = "Non completare le attività automaticamente",
 )
 
 internal val LocalSettingsStrings = staticCompositionLocalOf<SettingsStrings> {

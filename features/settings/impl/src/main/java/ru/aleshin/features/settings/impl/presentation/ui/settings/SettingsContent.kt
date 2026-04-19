@@ -116,8 +116,12 @@ internal fun SettingsContent(
             ) {
                 InterfaceSettingsSection(
                     calendarButtonBehavior = state.tasksSettings.calendarButtonBehavior,
+                    keepTasksNotFinished = state.tasksSettings.keepTasksNotFinished,
                     onUpdateCalendarBehavior = {
                         onUpdateTasksSettings(state.tasksSettings.copy(calendarButtonBehavior = it))
+                    },
+                    onUpdateKeepTasksNotFinished = {
+                        onUpdateTasksSettings(state.tasksSettings.copy(keepTasksNotFinished = it))
                     },
                 )
                 HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
@@ -206,7 +210,9 @@ internal fun MainSettingsSection(
 internal fun InterfaceSettingsSection(
     modifier: Modifier = Modifier,
     calendarButtonBehavior: CalendarButtonBehavior,
+    keepTasksNotFinished: Boolean,
     onUpdateCalendarBehavior: (CalendarButtonBehavior) -> Unit,
+    onUpdateKeepTasksNotFinished: (Boolean) -> Unit,
 ) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Text(
@@ -218,6 +224,24 @@ internal fun InterfaceSettingsSection(
             calendarButtonBehavior = calendarButtonBehavior,
             onUpdateCalendarBehavior = onUpdateCalendarBehavior,
         )
+        Surface(
+            modifier = modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium,
+            color = MaterialTheme.colorScheme.surfaceContainer,
+        ) {
+            Row(
+                modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    modifier = Modifier.weight(1f),
+                    text = SettingsThemeRes.strings.keepTasksNotFinishedTitle,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.titleMedium,
+                )
+                Switch(checked = keepTasksNotFinished, onCheckedChange = onUpdateKeepTasksNotFinished)
+            }
+        }
     }
 }
 

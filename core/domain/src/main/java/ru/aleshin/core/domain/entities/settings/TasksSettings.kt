@@ -25,4 +25,5 @@ data class TasksSettings(
     val taskAnalyticsRange: TimePeriod = TimePeriod.WEEK,
     val calendarButtonBehavior: CalendarButtonBehavior = CalendarButtonBehavior.SET_CURRENT_DATE,
     val secureMode: Boolean = false,
+    val keepTasksNotFinished: Boolean = false,
 )

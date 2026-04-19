@@ -30,6 +30,7 @@ fun TasksSettings.mapToData() = TasksSettingsEntity(
     taskAnalyticsRange = taskAnalyticsRange.toString(),
     calendarButtonBehavior = calendarButtonBehavior.toString(),
     secureMode = secureMode,
+    keepTasksNotFinished = keepTasksNotFinished,
 )
 
 fun TasksSettingsEntity.mapToDomain() = TasksSettings(
@@ -37,4 +38,5 @@ fun TasksSettingsEntity.mapToDomain() = TasksSettings(
     taskAnalyticsRange = TimePeriod.valueOf(taskAnalyticsRange),
     calendarButtonBehavior = CalendarButtonBehavior.valueOf(calendarButtonBehavior),
     secureMode = secureMode,
+    keepTasksNotFinished = keepTasksNotFinished,
 )
