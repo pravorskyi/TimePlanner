@@ -41,6 +41,11 @@ internal interface TimeTaskStatusController {
                     progress = 1f,
                     leftTime = 0,
                     isCompleted = if (keepTasksNotFinished) {
+                        // Preserve the user's manual completion state.
+                        // When the task first transitions to COMPLETED (old executionStatus != COMPLETED),
+                        // set isCompleted = false so the user must mark it manually.
+                        // On subsequent loops the old executionStatus is already COMPLETED, so
+                        // we keep whatever value the user last set.
                         if (executionStatus == TimeTaskStatus.COMPLETED) isCompleted else false
                     } else {
                         !(executionStatus == TimeTaskStatus.COMPLETED && !isCompleted)

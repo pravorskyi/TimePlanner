@@ -87,10 +87,10 @@ internal interface ScheduleWorkProcessor : FlowWorkProcessor<ScheduleWorkCommand
             var cycleUpdateJob: Job? = null
             val sendDate = scheduleInteractor.fetchFeatureScheduleDate()
             val scheduleDate = sendDate ?: date ?: dateManager.fetchBeginningCurrentDay()
-            val keepTasksNotFinished = settingsInteractor.fetchTasksSettings()
-                .first().rightOrElse(null)?.keepTasksNotFinished ?: false
             scheduleInteractor.fetchScheduleByDate(scheduleDate.time).collect { scheduleEither ->
                 cycleUpdateJob?.cancelAndJoin()
+                val keepTasksNotFinished = settingsInteractor.fetchTasksSettings()
+                    .first().rightOrElse(null)?.keepTasksNotFinished ?: false
                 scheduleEither.handle(
                     onLeftAction = { error -> send(EffectResult(HomeEffect.ShowError(error))) },
                     onRightAction = { scheduleModel ->
