@@ -29,4 +29,5 @@ data class TasksSettingsEntity(
     @ColumnInfo("task_analytics_range") val taskAnalyticsRange: String = "WEEK",
     @ColumnInfo("calendar_button_behavior") val calendarButtonBehavior: String = "SET_CURRENT_DATE",
     @ColumnInfo("secure_mode") val secureMode: Boolean = false,
+    @ColumnInfo("keep_tasks_not_finished", defaultValue = "0") val keepTasksNotFinished: Boolean = false,
 )

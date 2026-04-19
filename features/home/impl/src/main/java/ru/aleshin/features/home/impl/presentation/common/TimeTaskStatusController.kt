@@ -26,21 +26,30 @@ import javax.inject.Inject
  */
 internal interface TimeTaskStatusController {
 
-    fun updateStatus(timeTask: TimeTaskUi): TimeTaskUi
+    fun updateStatus(timeTask: TimeTaskUi, keepTasksNotFinished: Boolean = false): TimeTaskUi
 
     class Base @Inject constructor(
         private val statusManager: TimeTaskStatusChecker,
         private val dateManager: DateManager,
     ) : TimeTaskStatusController {
 
-        override fun updateStatus(timeTask: TimeTaskUi) = with(timeTask) {
+        override fun updateStatus(timeTask: TimeTaskUi, keepTasksNotFinished: Boolean) = with(timeTask) {
             val currentTime = dateManager.fetchCurrentDate()
             when (val status = statusManager.fetchStatus(timeToTimeRange(), currentTime)) {
                 TimeTaskStatus.COMPLETED -> copy(
                     executionStatus = status,
                     progress = 1f,
                     leftTime = 0,
-                    isCompleted = !(executionStatus == TimeTaskStatus.COMPLETED && !isCompleted),
+                    isCompleted = if (keepTasksNotFinished) {
+                        // Preserve the user's manual completion state.
+                        // When the task first transitions to COMPLETED (old executionStatus != COMPLETED),
+                        // set isCompleted = false so the user must mark it manually.
+                        // On subsequent loops the old executionStatus is already COMPLETED, so
+                        // we keep whatever value the user last set.
+                        if (executionStatus == TimeTaskStatus.COMPLETED) isCompleted else false
+                    } else {
+                        !(executionStatus == TimeTaskStatus.COMPLETED && !isCompleted)
+                    },
                 )
                 TimeTaskStatus.PLANNED -> copy(
                     executionStatus = status,

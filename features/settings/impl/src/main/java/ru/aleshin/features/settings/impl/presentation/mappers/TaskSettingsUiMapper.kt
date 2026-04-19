@@ -25,10 +25,12 @@ internal fun TasksSettings.mapToUi() = TasksSettingsUi(
     taskViewStatus = taskViewStatus,
     calendarButtonBehavior = calendarButtonBehavior,
     secureMode = secureMode,
+    keepTasksNotFinished = keepTasksNotFinished,
 )
 
 internal fun TasksSettingsUi.mapToDomain() = TasksSettings(
     taskViewStatus = taskViewStatus,
     calendarButtonBehavior = calendarButtonBehavior,
     secureMode = secureMode,
+    keepTasksNotFinished = keepTasksNotFinished,
 )

@@ -28,4 +28,5 @@ data class TasksSettingsUi(
     val taskViewStatus: ViewToggleStatus = ViewToggleStatus.COMPACT,
     val calendarButtonBehavior: CalendarButtonBehavior = CalendarButtonBehavior.SET_CURRENT_DATE,
     val secureMode: Boolean = false,
+    val keepTasksNotFinished: Boolean = false,
 ) : Parcelable
